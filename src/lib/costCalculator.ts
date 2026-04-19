@@ -33,7 +33,7 @@ export function calculateDispatchOptions(
   drivers: Driver[]
 ): DispatchOption[] {
   const available = drivers.filter(
-    (d) => !d.currentLoadId && d.status !== 'sleeper'
+    (d) => !d.currentLoadId && d.status !== 'sleeper' && d.hos.driveRemaining >= 2.0
   );
 
   const options: DispatchOption[] = available.map((driver) => {
@@ -56,9 +56,10 @@ export function calculateDispatchOptions(
     const estimatedDetention =
       hosRisk === 'high' ? Math.round(DETENTION_RATE_PER_HOUR * 2) : 0;
     const totalCost = deadheadCost + fuelCost + estimatedTollCost + estimatedDetention;
+    const scoringTotalCost = (deadheadCost * 1.5) + fuelCost + estimatedTollCost + estimatedDetention;
 
     // Score: lower cost + better HOS + better performance = higher score
-    const costScore = Math.max(0, 100 - (totalCost / load.rate) * 100);
+    const costScore = Math.max(0, 100 - (scoringTotalCost / load.rate) * 100);
     const hosScore = Math.min(driver.hos.driveRemaining / 11, 1) * 30;
     const perfScore = (driver.performance.onTimeRate / 100) * 20;
     const safetyScore = (driver.performance.safetyScore / 100) * 10;

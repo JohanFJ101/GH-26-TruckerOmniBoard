@@ -21,9 +21,9 @@ export default function SuggestedPrompts({ onSelect }: SuggestedPromptsProps) {
           style={{
             padding: '8px 14px',
             borderRadius: '20px',
-            border: '1px solid var(--bg-border)',
-            backgroundColor: 'var(--bg-elevated)',
-            color: 'var(--text-secondary)',
+            border: '1px solid #E2E8F0',
+            backgroundColor: '#FFFFFF',
+            color: '#374151',
             fontSize: '12px',
             cursor: 'pointer',
             transition: 'all 0.2s',
@@ -34,8 +34,8 @@ export default function SuggestedPrompts({ onSelect }: SuggestedPromptsProps) {
             e.currentTarget.style.color = 'var(--accent-primary)';
           }}
           onMouseOut={(e) => {
-            e.currentTarget.style.borderColor = 'var(--bg-border)';
-            e.currentTarget.style.color = 'var(--text-secondary)';
+            e.currentTarget.style.borderColor = '#E2E8F0';
+            e.currentTarget.style.color = '#374151';
           }}
         >
           {prompt}

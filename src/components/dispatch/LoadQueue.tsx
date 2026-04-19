@@ -5,7 +5,7 @@ import { formatCurrency } from '../../lib/costCalculator';
 import type { Load } from '../../types';
 
 const priorityColors: Record<Load['priority'], string> = {
-  standard: 'var(--text-muted)',
+  standard: '#64748B',
   hot: 'var(--accent-primary)',
   critical: 'var(--accent-red)',
 };
@@ -20,10 +20,10 @@ export default function LoadQueue() {
   return (
     <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--bg-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ padding: '10px 16px', borderBottom: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
           <h3 style={{ fontSize: '14px', fontWeight: 600, margin: 0 }}>Load Queue</h3>
-          <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{pendingLoads.length} pending</span>
+          <span style={{ fontSize: '11px', color: '#64748B' }}>{pendingLoads.length} pending</span>
         </div>
         <button className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px' }}>
           <Plus size={14} /> New Load
@@ -40,12 +40,12 @@ export default function LoadQueue() {
               onClick={() => setSelectedLoadId(isSelected ? null : load.id)}
               className={isSelected ? 'card-selected' : ''}
               style={{
-                padding: '14px 16px',
-                borderRadius: '8px',
+                padding: '10px 12px',
+                borderRadius: '2px',
                 marginBottom: '8px',
                 cursor: 'pointer',
-                border: isSelected ? '1px solid var(--accent-primary)' : '1px solid var(--bg-border)',
-                backgroundColor: isSelected ? 'rgba(249, 115, 22, 0.05)' : 'var(--bg-elevated)',
+                border: isSelected ? '1px solid var(--accent-primary)' : '1px solid #E2E8F0',
+                backgroundColor: isSelected ? '#EFF6FF' : '#FFFFFF',
                 transition: 'all 0.2s',
               }}
             >
@@ -60,7 +60,7 @@ export default function LoadQueue() {
                       flexShrink: 0,
                     }}
                   />
-                  <span style={{ fontFamily: 'Space Mono, monospace', fontSize: '13px', fontWeight: 600 }}>
+                  <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '14px', fontWeight: 600 }}>
                     {load.id}
                   </span>
                 </div>
@@ -70,18 +70,18 @@ export default function LoadQueue() {
                 />
               </div>
 
-              <div style={{ fontSize: '14px', fontWeight: 500, marginBottom: '6px' }}>
+              <div style={{ fontSize: '13px', fontWeight: 500, marginBottom: '6px' }}>
                 {load.pickup.city}, {load.pickup.state} → {load.delivery.city}, {load.delivery.state}
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: 'var(--text-secondary)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#374151' }}>
                 <span>{load.commodity}</span>
-                <span style={{ fontFamily: 'Space Mono, monospace', color: 'var(--accent-green)', fontWeight: 600 }}>
+                <span style={{ fontFamily: 'Inter', fontWeight: 600, color: 'var(--accent-green)', fontWeight: 600 }}>
                   {formatCurrency(load.rate)}
                 </span>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '6px', fontSize: '11px', color: 'var(--text-muted)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '6px', fontSize: '11px', color: '#64748B' }}>
                 <span>{load.miles} mi · {load.weight.toLocaleString()} lbs</span>
                 <span>{load.brokerName}</span>
               </div>

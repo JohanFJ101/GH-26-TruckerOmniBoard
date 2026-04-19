@@ -95,14 +95,14 @@ export default function MetricsRow() {
           transition={{ duration: 0.3, delay: index * 0.08 }}
           className="card"
           style={{
-            padding: '20px',
+            padding: '12px',
             borderTop: `2px solid ${card.accentColor}`,
             position: 'relative',
             overflow: 'hidden',
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-            <span style={{ fontSize: '12px', color: 'var(--text-secondary)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <span style={{ fontSize: '13px', color: '#374151', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               {card.label}
             </span>
             <span style={{ color: card.accentColor }}>{card.icon}</span>
@@ -114,7 +114,7 @@ export default function MetricsRow() {
                 <span
                   style={{
                     fontSize: '12px',
-                    fontFamily: 'Space Mono, monospace',
+                    fontFamily: 'Inter', fontWeight: 600,
                     color: card.trendPositive ? 'var(--accent-green)' : 'var(--accent-red)',
                     fontWeight: 600,
                   }}

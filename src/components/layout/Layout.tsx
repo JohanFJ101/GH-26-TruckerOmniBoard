@@ -1,29 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
-import { useStore } from '../../store/useStore';
 
 export default function Layout() {
-  const collapsed = useStore((s) => s.sidebarCollapsed);
-
   return (
-    <div style={{ display: 'flex', minHeight: '100vh' }}>
-      <Sidebar />
-      <div
-        style={{
-          flex: 1,
-          marginLeft: collapsed ? '64px' : '240px',
-          transition: 'margin-left 0.2s ease',
-        }}
-      >
-        <TopBar />
-        <main
-          style={{
-            marginTop: '56px',
-            padding: '24px',
-            minHeight: 'calc(100vh - 56px)',
-          }}
-        >
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#F8FAFC' }}>
+      <TopBar />
+      <div style={{ display: 'flex', flex: 1, marginTop: '48px' }}>
+        <Sidebar />
+        <main style={{ flex: 1, marginLeft: '48px', padding: '16px' }}>
           <Outlet />
         </main>
       </div>

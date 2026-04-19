@@ -20,9 +20,9 @@ export default function FleetMap() {
 
   return (
     <div className="card" style={{ height: '400px', overflow: 'hidden', padding: 0 }}>
-      <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--bg-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ padding: '10px 16px', borderBottom: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <h3 style={{ fontSize: '14px', fontWeight: 600, margin: 0 }}>Fleet Map</h3>
-        <span style={{ fontSize: '11px', color: 'var(--text-muted)', fontFamily: 'Space Mono, monospace' }}>
+        <span style={{ fontSize: '14px', color: '#64748B', fontFamily: 'Inter', fontWeight: 600 }}>
           {drivers.length} UNITS TRACKED
         </span>
       </div>
@@ -56,7 +56,7 @@ export default function FleetMap() {
                 <div style={{ minWidth: '200px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                     <StatusDot status={driver.status} />
-                    <strong style={{ fontSize: '14px' }}>{driver.name}</strong>
+                    <strong style={{ fontSize: '12px' }}>{driver.name}</strong>
                   </div>
                   <div style={{ fontSize: '12px', color: '#94a3b8', marginBottom: '8px' }}>
                     {driver.truckId} · {driver.truckType} · {driver.location.city}, {driver.location.state}
@@ -65,7 +65,7 @@ export default function FleetMap() {
                     <HOSBar driveRemaining={driver.hos.driveRemaining} dutyRemaining={driver.hos.dutyRemaining} compact />
                   </div>
                   {driver.currentLoadId && (
-                    <div style={{ fontSize: '11px', fontFamily: 'Space Mono, monospace', color: '#f97316' }}>
+                    <div style={{ fontSize: '14px', fontFamily: 'Inter', fontWeight: 600, color: '#2563EB' }}>
                       Load: {driver.currentLoadId}
                     </div>
                   )}

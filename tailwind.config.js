@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['Sora', 'sans-serif'],
+        display: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
         mono: ['Space Mono', 'monospace'],
       },
     },

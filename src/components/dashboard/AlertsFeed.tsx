@@ -34,7 +34,7 @@ export default function AlertsFeed() {
 
   return (
     <div className="card" style={{ height: '400px', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--bg-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div style={{ padding: '10px 16px', borderBottom: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <h3 style={{ fontSize: '14px', fontWeight: 600, margin: 0 }}>Live Alerts</h3>
           <Badge label={`${alerts.filter((a) => !a.acknowledged).length}`} variant="warning" />
@@ -48,11 +48,11 @@ export default function AlertsFeed() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1, duration: 0.2 }}
             style={{
-              padding: '12px 16px',
-              borderRadius: '8px',
+              padding: '8px 12px',
+              borderRadius: '2px',
               marginBottom: '8px',
               borderLeft: `3px solid ${severityColors[alert.severity]}`,
-              backgroundColor: alert.severity === 'critical' ? 'rgba(239, 68, 68, 0.06)' : 'var(--bg-elevated)',
+              backgroundColor: alert.severity === 'critical' ? 'rgba(239, 68, 68, 0.06)' : '#FFFFFF',
               opacity: alert.acknowledged ? 0.5 : 1,
               transition: 'all 0.2s',
             }}
@@ -66,14 +66,14 @@ export default function AlertsFeed() {
                   <div style={{ fontSize: '13px', fontWeight: 500, marginBottom: '4px' }}>
                     {alert.title}
                   </div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginBottom: '6px' }}>
+                  <div style={{ fontSize: '12px', color: '#374151', marginBottom: '6px' }}>
                     {getDriverName(alert.driverId)}
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     {alert.financialImpact && (
                       <span style={{
-                        fontSize: '11px',
-                        fontFamily: 'Space Mono, monospace',
+                        fontSize: '12px',
+                        fontFamily: 'Inter', fontWeight: 600,
                         color: 'var(--accent-amber)',
                         backgroundColor: 'rgba(251, 191, 36, 0.1)',
                         padding: '2px 8px',
@@ -82,7 +82,7 @@ export default function AlertsFeed() {
                         ${alert.financialImpact} risk
                       </span>
                     )}
-                    <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                    <span style={{ fontSize: '11px', color: '#64748B' }}>
                       {new Date(alert.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
@@ -94,7 +94,7 @@ export default function AlertsFeed() {
                   style={{
                     background: 'none',
                     border: 'none',
-                    color: 'var(--text-muted)',
+                    color: '#64748B',
                     cursor: 'pointer',
                     padding: '4px',
                     borderRadius: '4px',

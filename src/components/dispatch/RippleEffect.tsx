@@ -15,11 +15,11 @@ export default function RippleEffect({ drivers, assignedDriverName }: RippleEffe
   }));
 
   return (
-    <div className="card" style={{ padding: '20px', marginTop: '16px' }}>
-      <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>
+    <div className="card" style={{ padding: '12px', marginTop: '16px' }}>
+      <div style={{ fontSize: '14px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>
         Ripple Effect
       </div>
-      <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '16px' }}>
+      <div style={{ fontSize: '12px', color: '#374151', marginBottom: '16px' }}>
         Fleet availability next 24h if you assign <span style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>{assignedDriverName}</span>
       </div>
 
@@ -44,7 +44,7 @@ export default function RippleEffect({ drivers, assignedDriverName }: RippleEffe
             />
             <Bar dataKey="busyHours" stackId="a" radius={[0, 0, 0, 0]}>
               {data.map((entry, index) => (
-                <Cell key={index} fill={entry.isAssigned ? '#f97316' : '#3b82f6'} fillOpacity={0.7} />
+                <Cell key={index} fill={entry.isAssigned ? '#2563EB' : '#3b82f6'} fillOpacity={0.7} />
               ))}
             </Bar>
             <Bar dataKey="freeHours" stackId="a" radius={[0, 4, 4, 0]}>

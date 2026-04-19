@@ -26,7 +26,7 @@ export default function TrueCostCard({ option, onAssign }: TrueCostCardProps) {
       style={{
         marginBottom: '12px',
         overflow: 'hidden',
-        border: isTop ? '1px solid var(--accent-primary)' : '1px solid var(--bg-border)',
+        border: isTop ? '1px solid var(--accent-primary)' : '1px solid #E2E8F0',
         boxShadow: isTop ? 'var(--glow-orange)' : 'none',
       }}
     >
@@ -34,7 +34,7 @@ export default function TrueCostCard({ option, onAssign }: TrueCostCardProps) {
       <div
         onClick={() => setExpanded(!expanded)}
         style={{
-          padding: '16px 20px',
+          padding: '10px 16px',
           cursor: 'pointer',
           display: 'flex',
           justifyContent: 'space-between',
@@ -46,33 +46,33 @@ export default function TrueCostCard({ option, onAssign }: TrueCostCardProps) {
             style={{
               width: '32px',
               height: '32px',
-              borderRadius: '8px',
-              background: isTop ? 'linear-gradient(135deg, #f97316, #ea580c)' : 'var(--bg-border)',
+              borderRadius: '2px',
+              background: isTop ? '#2563EB' : '#E2E8F0',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '13px',
+              fontSize: '12px',
               fontWeight: 700,
-              color: isTop ? 'white' : 'var(--text-secondary)',
+              color: isTop ? 'white' : '#374151',
             }}
           >
             #{rank}
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontWeight: 600, fontSize: '15px' }}>{driver.name}</span>
+              <span style={{ fontWeight: 600, fontSize: '12px' }}>{driver.name}</span>
               {isTop && <Badge label="BEST MATCH" variant="success" />}
             </div>
-            <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px' }}>
+            <div style={{ fontSize: '12px', color: '#374151', marginTop: '2px' }}>
               {driver.truckId} · {driver.truckType} · {driver.location.city}, {driver.location.state}
             </div>
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <span style={{ fontFamily: 'Space Mono, monospace', fontSize: '18px', fontWeight: 700, color: 'var(--accent-primary)' }}>
+          <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '18px', fontWeight: 700, color: 'var(--accent-primary)' }}>
             {formatCurrency(trueCost.total)}
           </span>
-          {expanded ? <ChevronUp size={18} color="var(--text-muted)" /> : <ChevronDown size={18} color="var(--text-muted)" />}
+          {expanded ? <ChevronUp size={18} color="#64748B" /> : <ChevronDown size={18} color="#64748B" />}
         </div>
       </div>
 
@@ -86,15 +86,15 @@ export default function TrueCostCard({ option, onAssign }: TrueCostCardProps) {
           <div style={{ padding: '0 20px 20px 20px' }}>
             {/* Driver Info Row */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-secondary)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#374151' }}>
                 <MapPin size={14} />
                 <span>{trueCost.deadheadMiles} mi deadhead to pickup</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-secondary)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#374151' }}>
                 <Clock size={14} />
                 <span>{driver.hos.driveRemaining}h drive remaining</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: 'var(--text-secondary)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#374151' }}>
                 <Award size={14} />
                 <span>On-time: {driver.performance.onTimeRate}% · Safety: {driver.performance.safetyScore}</span>
               </div>
@@ -108,17 +108,17 @@ export default function TrueCostCard({ option, onAssign }: TrueCostCardProps) {
             {/* AI Recommendation */}
             <div
               style={{
-                padding: '12px 16px',
-                borderRadius: '8px',
-                backgroundColor: 'rgba(249, 115, 22, 0.06)',
+                padding: '8px 12px',
+                borderRadius: '2px',
+                backgroundColor: '#EFF6FF',
                 borderLeft: '3px solid var(--accent-primary)',
                 marginBottom: '16px',
-                fontSize: '13px',
-                color: 'var(--text-secondary)',
+                fontSize: '12px',
+                color: '#374151',
                 lineHeight: 1.5,
               }}
             >
-              <span style={{ fontWeight: 600, color: 'var(--accent-primary)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <span style={{ fontWeight: 600, color: 'var(--accent-primary)', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 AI Recommendation
               </span>
               <div style={{ marginTop: '4px' }}>{recommendation}</div>
@@ -126,24 +126,24 @@ export default function TrueCostCard({ option, onAssign }: TrueCostCardProps) {
 
             {/* Cost Breakdown */}
             <div style={{ marginBottom: '16px' }}>
-              <div style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
+              <div style={{ fontSize: '14px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
                 True Cost Breakdown
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '13px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '12px' }}>
                 {[
                   { label: `Deadhead (${trueCost.deadheadMiles} mi)`, value: trueCost.deadheadCost },
                   { label: 'Fuel (route)', value: trueCost.fuelCost },
                   { label: 'Est. tolls', value: trueCost.estimatedTollCost },
                   { label: 'Est. detention', value: trueCost.estimatedDetention },
                 ].map(({ label, value }) => (
-                  <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0', borderBottom: '1px solid var(--bg-border)' }}>
-                    <span style={{ color: 'var(--text-secondary)' }}>{label}</span>
-                    <span style={{ fontFamily: 'Space Mono, monospace' }}>{formatCurrency(value)}</span>
+                  <div key={label} style={{ display: 'flex', justifyContent: 'space-between', padding: '4px 0', borderBottom: '1px solid #E2E8F0' }}>
+                    <span style={{ color: '#374151' }}>{label}</span>
+                    <span style={{ fontFamily: 'Inter', fontWeight: 600 }}>{formatCurrency(value)}</span>
                   </div>
                 ))}
-                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', fontWeight: 700, fontSize: '15px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', fontWeight: 700, fontSize: '11px' }}>
                   <span>TOTAL COST</span>
-                  <span style={{ color: 'var(--accent-primary)', fontFamily: 'Space Mono, monospace' }}>
+                  <span style={{ color: 'var(--accent-primary)', fontFamily: 'Inter', fontWeight: 600 }}>
                     {formatCurrency(trueCost.total)}
                   </span>
                 </div>
@@ -154,7 +154,7 @@ export default function TrueCostCard({ option, onAssign }: TrueCostCardProps) {
             {warnings.length > 0 && (
               <div style={{ marginBottom: '16px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 {warnings.map((warning, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', borderRadius: '6px', backgroundColor: 'rgba(251, 191, 36, 0.08)', fontSize: '12px', color: 'var(--accent-amber)' }}>
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', borderRadius: '2px', backgroundColor: 'rgba(251, 191, 36, 0.08)', fontSize: '11px', color: 'var(--accent-amber)' }}>
                     <AlertTriangle size={14} />
                     {warning}
                   </div>
@@ -163,7 +163,7 @@ export default function TrueCostCard({ option, onAssign }: TrueCostCardProps) {
             )}
 
             {/* Assign Button */}
-            <button onClick={onAssign} className="btn-primary" style={{ width: '100%', padding: '12px', fontSize: '14px', letterSpacing: '0.5px' }}>
+            <button onClick={onAssign} className="btn-primary" style={{ width: '100%', padding: '12px', fontSize: '11px', letterSpacing: '0.5px' }}>
               ASSIGN THIS DRIVER
             </button>
           </div>

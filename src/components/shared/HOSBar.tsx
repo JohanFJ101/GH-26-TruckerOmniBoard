@@ -21,12 +21,12 @@ export default function HOSBar({ driveRemaining, dutyRemaining, compact = false 
     <div style={{ display: 'flex', flexDirection: 'column', gap: compact ? '4px' : '6px', width: '100%' }}>
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2px' }}>
-          <span style={{ fontSize, color: 'var(--text-secondary)' }}>Drive</span>
-          <span style={{ fontSize, fontFamily: 'Space Mono, monospace', color: getColor(driveRemaining) }}>
+          <span style={{ fontSize, color: '#374151' }}>Drive</span>
+          <span style={{ fontSize, fontFamily: 'Inter', fontWeight: 600, color: getColor(driveRemaining) }}>
             {driveRemaining.toFixed(1)}h
           </span>
         </div>
-        <div style={{ width: '100%', height: `${barHeight}px`, backgroundColor: 'var(--bg-border)', borderRadius: '3px', overflow: 'hidden' }}>
+        <div style={{ width: '100%', height: `${barHeight}px`, backgroundColor: '#E2E8F0', borderRadius: '3px', overflow: 'hidden' }}>
           <div
             style={{
               width: `${drivePercent}%`,
@@ -40,12 +40,12 @@ export default function HOSBar({ driveRemaining, dutyRemaining, compact = false 
       </div>
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2px' }}>
-          <span style={{ fontSize, color: 'var(--text-secondary)' }}>Duty</span>
-          <span style={{ fontSize, fontFamily: 'Space Mono, monospace', color: getColor(dutyRemaining) }}>
+          <span style={{ fontSize, color: '#374151' }}>Duty</span>
+          <span style={{ fontSize, fontFamily: 'Inter', fontWeight: 600, color: getColor(dutyRemaining) }}>
             {dutyRemaining.toFixed(1)}h
           </span>
         </div>
-        <div style={{ width: '100%', height: `${barHeight}px`, backgroundColor: 'var(--bg-border)', borderRadius: '3px', overflow: 'hidden' }}>
+        <div style={{ width: '100%', height: `${barHeight}px`, backgroundColor: '#E2E8F0', borderRadius: '3px', overflow: 'hidden' }}>
           <div
             style={{
               width: `${dutyPercent}%`,

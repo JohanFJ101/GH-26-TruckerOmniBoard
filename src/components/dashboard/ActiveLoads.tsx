@@ -24,7 +24,7 @@ export default function ActiveLoads() {
 
   return (
     <div className="card" style={{ marginTop: '24px' }}>
-      <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--bg-border)' }}>
+      <div style={{ padding: '10px 16px', borderBottom: '1px solid #E2E8F0' }}>
         <h3 style={{ fontSize: '14px', fontWeight: 600, margin: 0 }}>Active Loads</h3>
       </div>
 
@@ -33,13 +33,13 @@ export default function ActiveLoads() {
         style={{
           display: 'grid',
           gridTemplateColumns: '100px 1fr 150px 120px 120px 100px 60px',
-          padding: '12px 20px',
-          fontSize: '11px',
+          padding: '8px 16px',
+          fontSize: '12px',
           fontWeight: 600,
-          color: 'var(--text-muted)',
+          color: '#64748B',
           textTransform: 'uppercase',
           letterSpacing: '0.5px',
-          borderBottom: '1px solid var(--bg-border)',
+          borderBottom: '1px solid #E2E8F0',
         }}
       >
         <span>Load ID</span>
@@ -64,35 +64,35 @@ export default function ActiveLoads() {
               style={{
                 display: 'grid',
                 gridTemplateColumns: '100px 1fr 150px 120px 120px 100px 60px',
-                padding: '14px 20px',
+                padding: '10px 16px',
                 alignItems: 'center',
-                borderBottom: '1px solid var(--bg-border)',
+                borderBottom: '1px solid #E2E8F0',
                 cursor: 'pointer',
                 transition: 'all 0.2s',
-                backgroundColor: isExpanded ? 'var(--bg-elevated)' : 'transparent',
+                backgroundColor: isExpanded ? '#FFFFFF' : 'transparent',
               }}
             >
-              <span style={{ fontFamily: 'Space Mono, monospace', fontSize: '13px', color: 'var(--accent-primary)' }}>
+              <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '12px', color: 'var(--accent-primary)' }}>
                 {load.id}
               </span>
-              <span style={{ fontSize: '13px' }}>
+              <span style={{ fontSize: '12px' }}>
                 {load.pickup.city}, {load.pickup.state} → {load.delivery.city}, {load.delivery.state}
               </span>
-              <span style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+              <span style={{ fontSize: '12px', color: '#374151' }}>
                 {driver?.name ?? '—'}
               </span>
               <Badge label={load.status} variant={statusVariant[load.status]} />
               <span style={{
-                fontSize: '13px',
-                fontFamily: 'Space Mono, monospace',
-                color: isDelayed ? 'var(--accent-red)' : 'var(--text-secondary)',
+                fontSize: '12px',
+                fontFamily: 'Inter', fontWeight: 600,
+                color: isDelayed ? 'var(--accent-red)' : '#374151',
               }}>
                 {new Date(load.delivery.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </span>
-              <span style={{ fontFamily: 'Space Mono, monospace', fontSize: '13px', color: 'var(--accent-green)' }}>
+              <span style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '12px', color: 'var(--accent-green)' }}>
                 {formatCurrency(load.rate)}
               </span>
-              <span style={{ color: 'var(--text-muted)' }}>
+              <span style={{ color: '#64748B' }}>
                 {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
               </span>
             </div>
@@ -106,30 +106,30 @@ export default function ActiveLoads() {
                   transition={{ duration: 0.2 }}
                   style={{ overflow: 'hidden' }}
                 >
-                  <div style={{ padding: '16px 20px 16px 40px', backgroundColor: 'var(--bg-elevated)', borderBottom: '1px solid var(--bg-border)' }}>
+                  <div style={{ padding: '16px 20px 16px 40px', backgroundColor: '#FFFFFF', borderBottom: '1px solid #E2E8F0' }}>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', fontSize: '12px' }}>
                       <div>
-                        <span style={{ color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>Commodity</span>
+                        <span style={{ color: '#64748B', display: 'block', marginBottom: '4px' }}>Commodity</span>
                         <span>{load.commodity}</span>
                       </div>
                       <div>
-                        <span style={{ color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>Weight</span>
-                        <span style={{ fontFamily: 'Space Mono, monospace' }}>{load.weight.toLocaleString()} lbs</span>
+                        <span style={{ color: '#64748B', display: 'block', marginBottom: '4px' }}>Weight</span>
+                        <span style={{ fontFamily: 'Inter', fontWeight: 600 }}>{load.weight.toLocaleString()} lbs</span>
                       </div>
                       <div>
-                        <span style={{ color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>Miles</span>
-                        <span style={{ fontFamily: 'Space Mono, monospace' }}>{load.miles}</span>
+                        <span style={{ color: '#64748B', display: 'block', marginBottom: '4px' }}>Miles</span>
+                        <span style={{ fontFamily: 'Inter', fontWeight: 600 }}>{load.miles}</span>
                       </div>
                       <div>
-                        <span style={{ color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>Broker</span>
+                        <span style={{ color: '#64748B', display: 'block', marginBottom: '4px' }}>Broker</span>
                         <span>{load.brokerName}</span>
                       </div>
                       <div>
-                        <span style={{ color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>Pickup Address</span>
+                        <span style={{ color: '#64748B', display: 'block', marginBottom: '4px' }}>Pickup Address</span>
                         <span>{load.pickup.address}</span>
                       </div>
                       <div>
-                        <span style={{ color: 'var(--text-muted)', display: 'block', marginBottom: '4px' }}>Delivery Address</span>
+                        <span style={{ color: '#64748B', display: 'block', marginBottom: '4px' }}>Delivery Address</span>
                         <span>{load.delivery.address}</span>
                       </div>
                     </div>

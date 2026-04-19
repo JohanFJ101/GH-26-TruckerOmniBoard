@@ -29,25 +29,25 @@ export default function Drivers() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.08 }}
             className="card"
-            style={{ padding: '20px', transition: 'all 0.2s' }}
+            style={{ padding: '12px', transition: 'all 0.2s' }}
           >
             {/* Header */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
               <div style={{
                 width: '44px', height: '44px', borderRadius: '50%',
-                background: 'linear-gradient(135deg, #f97316, #ea580c)',
+                background: '#2563EB',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '14px', fontWeight: 700, color: 'white',
+                fontSize: '18px', fontWeight: 700, color: 'white',
               }}>
                 {driver.avatar}
               </div>
               <div style={{ flex: 1 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontWeight: 600, fontSize: '15px' }}>{driver.name}</span>
+                  <span style={{ fontWeight: 600, fontSize: '12px' }}>{driver.name}</span>
                   <StatusDot status={driver.status} />
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '2px' }}>
-                  <span style={{ fontSize: '12px', color: 'var(--text-secondary)', fontFamily: 'Space Mono, monospace' }}>
+                  <span style={{ fontSize: '14px', color: '#374151', fontFamily: 'Inter', fontWeight: 600 }}>
                     {driver.truckId}
                   </span>
                   <Badge label={truckTypeLabels[driver.truckType]} variant="neutral" />
@@ -62,40 +62,40 @@ export default function Drivers() {
 
             {/* Stats */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '16px' }}>
-              <div style={{ padding: '8px', borderRadius: '6px', backgroundColor: 'var(--bg-elevated)' }}>
-                <div style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Safety</div>
+              <div style={{ padding: '8px', borderRadius: '2px', backgroundColor: '#FFFFFF' }}>
+                <div style={{ fontSize: '11px', color: '#64748B', textTransform: 'uppercase' }}>Safety</div>
                 <div style={{
-                  fontFamily: 'Space Mono, monospace', fontSize: '18px', fontWeight: 700,
+                  fontFamily: 'Inter', fontWeight: 600, fontSize: '18px', fontWeight: 700,
                   color: driver.performance.safetyScore >= 90 ? 'var(--accent-green)' : driver.performance.safetyScore >= 80 ? 'var(--accent-amber)' : 'var(--accent-red)',
                 }}>
                   {driver.performance.safetyScore}
                 </div>
               </div>
-              <div style={{ padding: '8px', borderRadius: '6px', backgroundColor: 'var(--bg-elevated)' }}>
-                <div style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>On-Time</div>
-                <div style={{ fontFamily: 'Space Mono, monospace', fontSize: '18px', fontWeight: 700, color: 'var(--accent-green)' }}>
+              <div style={{ padding: '8px', borderRadius: '2px', backgroundColor: '#FFFFFF' }}>
+                <div style={{ fontSize: '11px', color: '#64748B', textTransform: 'uppercase' }}>On-Time</div>
+                <div style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '18px', fontWeight: 700, color: 'var(--accent-green)' }}>
                   {driver.performance.onTimeRate}%
                 </div>
               </div>
-              <div style={{ padding: '8px', borderRadius: '6px', backgroundColor: 'var(--bg-elevated)' }}>
-                <div style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Cost/Mi</div>
-                <div style={{ fontFamily: 'Space Mono, monospace', fontSize: '18px', fontWeight: 700 }}>
+              <div style={{ padding: '8px', borderRadius: '2px', backgroundColor: '#FFFFFF' }}>
+                <div style={{ fontSize: '11px', color: '#64748B', textTransform: 'uppercase' }}>Cost/Mi</div>
+                <div style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '18px', fontWeight: 700 }}>
                   ${driver.performance.avgCostPerMile.toFixed(2)}
                 </div>
               </div>
-              <div style={{ padding: '8px', borderRadius: '6px', backgroundColor: 'var(--bg-elevated)' }}>
-                <div style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Mi/Week</div>
-                <div style={{ fontFamily: 'Space Mono, monospace', fontSize: '18px', fontWeight: 700 }}>
+              <div style={{ padding: '8px', borderRadius: '2px', backgroundColor: '#FFFFFF' }}>
+                <div style={{ fontSize: '11px', color: '#64748B', textTransform: 'uppercase' }}>Mi/Week</div>
+                <div style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '18px', fontWeight: 700 }}>
                   {driver.performance.totalMilesThisWeek.toLocaleString()}
                 </div>
               </div>
             </div>
 
             {/* Location */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px', fontSize: '12px', color: 'var(--text-secondary)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px', fontSize: '12px', color: '#374151' }}>
               <MapPin size={14} />
               <span>{driver.location.city}, {driver.location.state}</span>
-              <span style={{ color: 'var(--text-muted)' }}>· {driver.location.lastUpdated}</span>
+              <span style={{ color: '#64748B' }}>· {driver.location.lastUpdated}</span>
             </div>
 
             {/* Actions */}

@@ -82,9 +82,9 @@ export default function CopilotPanel() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 104px)' }}>
       {/* Header */}
-      <div className="card" style={{ padding: '14px 20px', borderRadius: '12px 12px 0 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: 'none' }}>
+      <div className="card" style={{ padding: '10px 16px', borderRadius: '4px 4px 0 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: 'none' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{ width: '28px', height: '28px', borderRadius: '6px', background: 'linear-gradient(135deg, #f97316, #ea580c)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: '28px', height: '28px', borderRadius: '2px', background: '#2563EB', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Truck size={16} color="white" />
           </div>
           <span style={{ fontSize: '14px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Dispatch Copilot</span>
@@ -98,7 +98,7 @@ export default function CopilotPanel() {
       </div>
 
       {/* Messages */}
-      <div className="card" style={{ flex: 1, overflow: 'auto', padding: '20px', borderRadius: 0, borderTop: 'none', borderBottom: 'none' }}>
+      <div className="card" style={{ flex: 1, overflow: 'auto', padding: '12px', borderRadius: 0, borderTop: 'none', borderBottom: 'none' }}>
         {messages.length === 1 && <SuggestedPrompts onSelect={handlePromptSelect} />}
 
         {messages.map((msg) => (
@@ -107,7 +107,7 @@ export default function CopilotPanel() {
 
         {loading && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '14px 18px' }}>
-            <div style={{ width: '20px', height: '20px', borderRadius: '4px', background: 'linear-gradient(135deg, #f97316, #ea580c)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '20px', height: '20px', borderRadius: '4px', background: '#2563EB', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Truck size={12} color="white" />
             </div>
             <div style={{ display: 'flex', gap: '4px' }}>
@@ -122,7 +122,7 @@ export default function CopilotPanel() {
       </div>
 
       {/* Input */}
-      <div className="card" style={{ padding: '16px 20px', borderRadius: '0 0 12px 12px', borderTop: 'none' }}>
+      <div className="card" style={{ padding: '10px 16px', borderRadius: '0 0 12px 12px', borderTop: 'none' }}>
         {messages.length > 1 && <SuggestedPrompts onSelect={handlePromptSelect} />}
         <div style={{ display: 'flex', gap: '12px' }}>
           <input
@@ -132,24 +132,24 @@ export default function CopilotPanel() {
             placeholder="Ask anything about your fleet..."
             style={{
               flex: 1,
-              padding: '12px 16px',
-              borderRadius: '8px',
-              border: '1px solid var(--bg-border)',
-              backgroundColor: 'var(--bg-elevated)',
+              padding: '8px 12px',
+              borderRadius: '2px',
+              border: '1px solid #E2E8F0',
+              backgroundColor: '#FFFFFF',
               color: 'var(--text-primary)',
-              fontSize: '14px',
+              fontSize: '12px',
               fontFamily: 'Sora, sans-serif',
               outline: 'none',
               transition: 'border-color 0.2s',
             }}
             onFocus={(e) => { e.target.style.borderColor = 'var(--accent-primary)'; }}
-            onBlur={(e) => { e.target.style.borderColor = 'var(--bg-border)'; }}
+            onBlur={(e) => { e.target.style.borderColor = '#E2E8F0'; }}
           />
           <button
             onClick={() => sendMessage(input)}
             disabled={!input.trim() || loading}
             className="btn-primary"
-            style={{ padding: '12px 20px', opacity: !input.trim() || loading ? 0.5 : 1 }}
+            style={{ padding: '8px 16px', opacity: !input.trim() || loading ? 0.5 : 1 }}
           >
             <Send size={18} />
           </button>
