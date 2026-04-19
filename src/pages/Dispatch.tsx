@@ -119,7 +119,7 @@ export default function Dispatch() {
 
               <div style={{ marginBottom: '16px' }}>
                 <div style={{ fontSize: '14px', fontWeight: 600, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '4px' }}>
-                  AI-Ranked Options for
+                  Ranked Options for
                 </div>
                 <div style={{ fontSize: '14px', fontWeight: 600 }}>
                   <span style={{ color: 'var(--accent-primary)', fontFamily: 'Inter', fontWeight: 600 }}>{selectedLoad.id}</span>

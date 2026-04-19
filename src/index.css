@@ -90,12 +90,13 @@ body {
 }
 
 /* Status Badges */
-.badge-available { background: #E6F9F0; color: #1B8A56; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 500; }
-.badge-in-transit { background: #E8F0FE; color: #2563EB; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 500; }
-.badge-pending { background: #FFF3E0; color: #C45C00; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 500; }
-.badge-critical { background: #FEF2F2; color: #DC2626; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 500; }
-.badge-neutral { background: #F1F5F9; color: #64748B; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 500; }
-.badge-warning { background: #FFF7ED; color: #B45309; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 500; }
+.badge-available { background: #E6F9F0; color: #1B8A56; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 500; width: fit-content; }
+.badge-info { background: #E8F0FE; color: #2563EB; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 500; width: fit-content; }
+.badge-in-transit { background: #E8F0FE; color: #2563EB; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 500; width: fit-content; }
+.badge-pending { background: #FFF3E0; color: #C45C00; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 500; width: fit-content; }
+.badge-critical { background: #FEF2F2; color: #DC2626; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 500; width: fit-content; }
+.badge-neutral { background: #F1F5F9; color: #64748B; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 500; width: fit-content; }
+.badge-warning { background: #FFF7ED; color: #B45309; border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 500; width: fit-content; }
 
 .font-mono { font-family: 'Inter', sans-serif; }
 .metric-value { font-size: 24px; font-weight: 700; color: #0F172A; }

@@ -112,8 +112,17 @@ export function calculateDispatchOptions(
     };
   });
 
-  // Sort by score descending and assign ranks
-  options.sort((a, b) => b.score - a.score);
+  // Composite rank: 60% cost efficiency, 25% on-time rate, 15% safety score
+  const maxCost = Math.max(...options.map(o => o.trueCost.total), 1);
+  options.sort((a, b) => {
+    const costA = (1 - a.trueCost.total / maxCost) * 60;
+    const costB = (1 - b.trueCost.total / maxCost) * 60;
+    const onTimeA = (a.driver.performance.onTimeRate / 100) * 25;
+    const onTimeB = (b.driver.performance.onTimeRate / 100) * 25;
+    const safetyA = (a.driver.performance.safetyScore / 100) * 15;
+    const safetyB = (b.driver.performance.safetyScore / 100) * 15;
+    return (costB + onTimeB + safetyB) - (costA + onTimeA + safetyA);
+  });
   options.forEach((opt, idx) => {
     opt.rank = idx + 1;
   });

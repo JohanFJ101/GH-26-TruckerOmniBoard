@@ -78,12 +78,42 @@ export const useStore = create<StoreState>((set) => ({
       const mappedDrivers = navproDrivers.map((d, index) => {
         const first = d.basic_info?.driver_first_name || '';
         const last = d.basic_info?.driver_last_name || '';
-        const lat = 39.5 + index * 2.5;
-        const lng = -98.35 + index * 3;
-        const locParts = d.driver_location?.last_known_location ? d.driver_location.last_known_location.split(',') : ['Unknown', 'Unknown'];
-        const city = locParts[0]?.trim() || 'Unknown';
-        const state = locParts[1]?.trim() || 'Unknown';
-        const driveRemaining = Math.round((Math.random() * 9 + 2) * 10) / 10;
+        const fullName = `${first} ${last}`.trim();
+
+        // Match to mock driver by name to get real location data
+        const mockMatch = MOCK_DRIVERS.find(
+          (m) => m.name.toLowerCase() === fullName.toLowerCase()
+        );
+
+        let city: string;
+        let state: string;
+        let lat: number;
+        let lng: number;
+
+        if (mockMatch) {
+          ({ city, state, lat, lng } = mockMatch.location);
+        } else if (d.driver_location?.last_known_location) {
+          const parts = d.driver_location.last_known_location.split(',');
+          city = parts[0]?.trim() || 'En Route';
+          state = parts[1]?.trim() || 'US';
+          lat = 39.5 + index * 2.5;
+          lng = -98.35 + index * 3;
+        } else {
+          // Spread unmatched drivers across major US freight hubs
+          const hubs = [
+            { city: 'Dallas', state: 'TX', lat: 32.7767, lng: -96.7970 },
+            { city: 'Atlanta', state: 'GA', lat: 33.7490, lng: -84.3880 },
+            { city: 'Kansas City', state: 'MO', lat: 39.0997, lng: -94.5786 },
+            { city: 'Salt Lake City', state: 'UT', lat: 40.7608, lng: -111.8910 },
+            { city: 'Indianapolis', state: 'IN', lat: 39.7684, lng: -86.1581 },
+          ];
+          const hub = hubs[index % hubs.length];
+          ({ city, state, lat, lng } = hub);
+        }
+
+        const driveRemaining = mockMatch
+          ? mockMatch.hos.driveRemaining
+          : Math.round((Math.random() * 9 + 2) * 10) / 10;
         
         return {
           id: `D-${d.driver_id}`,

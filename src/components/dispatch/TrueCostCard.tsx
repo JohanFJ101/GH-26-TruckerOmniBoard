@@ -66,6 +66,14 @@ export default function TrueCostCard({ option, onAssign }: TrueCostCardProps) {
             <div style={{ fontSize: '12px', color: '#374151', marginTop: '2px' }}>
               {driver.truckId} · {driver.truckType} · {driver.location.city}, {driver.location.state}
             </div>
+            <div style={{ display: 'flex', gap: '10px', marginTop: '4px' }}>
+              <span style={{ fontSize: '11px', color: '#64748B' }}>
+                On-time <span style={{ fontWeight: 600, color: driver.performance.onTimeRate >= 95 ? 'var(--accent-green)' : driver.performance.onTimeRate >= 90 ? 'var(--accent-amber)' : '#EF4444' }}>{driver.performance.onTimeRate}%</span>
+              </span>
+              <span style={{ fontSize: '11px', color: '#64748B' }}>
+                Safety <span style={{ fontWeight: 600, color: driver.performance.safetyScore >= 90 ? 'var(--accent-green)' : driver.performance.safetyScore >= 80 ? 'var(--accent-amber)' : '#EF4444' }}>{driver.performance.safetyScore}</span>
+              </span>
+            </div>
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -119,7 +127,7 @@ export default function TrueCostCard({ option, onAssign }: TrueCostCardProps) {
               }}
             >
               <span style={{ fontWeight: 600, color: 'var(--accent-primary)', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                AI Recommendation
+                Recommendation
               </span>
               <div style={{ marginTop: '4px' }}>{recommendation}</div>
             </div>
