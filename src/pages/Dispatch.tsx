@@ -8,7 +8,7 @@ import TrueCostCard from '../components/dispatch/TrueCostCard';
 import RippleEffect from '../components/dispatch/RippleEffect';
 import AssignModal from '../components/dispatch/AssignModal';
 import type { DispatchOption } from '../types';
-import { simulateAssignTrip } from '../lib/navproApi';
+import { assignTrip } from '../lib/navproApi';
 
 export default function Dispatch() {
   const { loads, drivers, selectedLoadId, assignDriver, navproLoaded, isLiveData, addLoad } = useStore();
@@ -36,7 +36,7 @@ export default function Dispatch() {
     if (selectedOption && selectedLoad) {
       setAssigning(true);
       const driverIdNum = parseInt(selectedOption.driver.id.replace('D-', ''), 10) || 0;
-      await simulateAssignTrip(driverIdNum, selectedLoad.pickup, selectedLoad.delivery);
+      await assignTrip(driverIdNum, selectedLoad.pickup, selectedLoad.delivery);
       
       assignDriver(selectedLoad.id, selectedOption.driver.id);
       setAssignedDriverName(selectedOption.driver.name);

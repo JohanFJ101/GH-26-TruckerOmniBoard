@@ -9,6 +9,7 @@ const prompts = [
   "Show me Ray Delgado's HOS status",
   "What's my fleet availability tomorrow morning?",
   "Which driver should I NOT assign to long hauls right now?",
+  "Is the local AI model (Ollama) running and responding?",
 ];
 
 export default function SuggestedPrompts({ onSelect }: SuggestedPromptsProps) {

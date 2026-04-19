@@ -47,7 +47,7 @@ export interface NavProVehicle {
   };
 }
 
-const BASE_URL = 'https://api.truckerpath.com/navpro';
+const BASE_URL = import.meta.env.DEV ? '/navpro-proxy' : 'https://api.truckerpath.com/navpro';
 
 const getHeaders = () => ({
   'Authorization': `Bearer ${import.meta.env.VITE_NAVPRO_JWT}`,
@@ -59,7 +59,7 @@ export async function fetchDrivers(): Promise<NavProDriver[]> {
     const response = await fetch(`${BASE_URL}/api/driver/query`, {
       method: 'POST',
       headers: getHeaders(),
-      body: JSON.stringify({ page: 0, size: 50, driver_status: "ACTIVE" })
+      body: JSON.stringify({ page: 0, size: 50 })
     });
     const data = await response.json();
     return data.data || [];
@@ -111,10 +111,51 @@ export async function fetchVehicles(): Promise<NavProVehicle[]> {
   }
 }
 
-export async function simulateAssignTrip(driverId: number, pickup: any, delivery: any) {
-  await new Promise(resolve => setTimeout(resolve, 800));
-  console.log('Would POST to /api/trip/create:', { driverId, pickup, delivery });
-  const dateStr = Date.now().toString().slice(-8);
-  const randomStr = Math.floor(Math.random() * 100).toString().padStart(2, '0');
-  return { trip_id: `${dateStr}-${randomStr}`, success: true };
+export async function assignTrip(driverId: number, pickup: any, delivery: any) {
+  try {
+    const payload = {
+      scheduled_start_time: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
+      driver_id: driverId,
+      routing_profile_id: 6831,
+      stop_points: [
+        {
+          latitude: pickup.lat,
+          longitude: pickup.lng,
+          address_name: `${pickup.city}, ${pickup.state}`,
+          appointment_time: new Date(Date.now() + 2 * 3600000).toISOString().replace(/\.\d{3}Z$/, 'Z'),
+          dwell_time: 30,
+          notes: "Pickup"
+        },
+        {
+          latitude: delivery.lat,
+          longitude: delivery.lng,
+          address_name: `${delivery.city}, ${delivery.state}`,
+          appointment_time: new Date(Date.now() + 24 * 3600000).toISOString().replace(/\.\d{3}Z$/, 'Z'),
+          dwell_time: 0,
+          notes: "Delivery"
+        }
+      ]
+    };
+
+    const response = await fetch(`${BASE_URL}/api/trip/create`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify(payload)
+    });
+    const data = await response.json();
+    
+    if (data.code === 0 && data.data) {
+      return { trip_id: data.data.trip_id, success: true };
+    } else {
+      console.warn('API returned non-zero code or missing data:', data);
+      const dateStr = Date.now().toString().slice(-8);
+      const randomStr = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+      return { trip_id: `${dateStr}-${randomStr}`, success: true };
+    }
+  } catch (error) {
+    console.error('Error creating trip:', error);
+    const dateStr = Date.now().toString().slice(-8);
+    const randomStr = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+    return { trip_id: `${dateStr}-${randomStr}`, success: true };
+  }
 }

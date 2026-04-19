@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Send, Trash2, Truck } from 'lucide-react';
 import { useStore } from '../../store/useStore';
-import { askCopilot } from '../../lib/geminiApi';
+import { askCopilot, pingOllama } from '../../lib/ollamaApi';
 import CopilotMessage from './CopilotMessage';
 import SuggestedPrompts from './SuggestedPrompts';
 import type { CopilotMessage as MessageType } from '../../types';
@@ -37,33 +37,69 @@ export default function CopilotPanel() {
     setInput('');
     setLoading(true);
 
+    const streamId = `a-${Date.now()}`;
+    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
     try {
       const history = messages
         .filter((m) => m.id !== 'welcome')
         .map((m) => ({ role: m.role, content: m.content }));
 
-      const response = await askCopilot(
+      const isPing = /local ai model|ollama/i.test(text) && /running|responding|status|up|online/i.test(text);
+
+      if (isPing) {
+        const response = await pingOllama();
+        setMessages((prev) => [...prev, { id: streamId, role: 'assistant', content: response, timestamp }]);
+        return;
+      }
+
+      let firstToken = true;
+      let buffer = '';
+      let flushTimer: ReturnType<typeof setTimeout> | null = null;
+
+      const flush = () => {
+        if (!buffer) return;
+        const chunk = buffer;
+        buffer = '';
+        setMessages((prev) =>
+          prev.map((m) => m.id === streamId ? { ...m, content: m.content + chunk } : m)
+        );
+      };
+
+      const finalResponse = await askCopilot(
         text.trim(),
         history,
-        { drivers, loads, alerts, metrics }
+        { drivers, loads, alerts, metrics },
+        (token) => {
+          if (firstToken) {
+            firstToken = false;
+            setLoading(false);
+            setMessages((prev) => [...prev, { id: streamId, role: 'assistant', content: token, timestamp }]);
+          } else {
+            buffer += token;
+            if (!flushTimer) {
+              flushTimer = setTimeout(() => {
+                flushTimer = null;
+                flush();
+              }, 60);
+            }
+          }
+        }
       );
 
-      const aiMsg: MessageType = {
-        id: `a-${Date.now()}`,
-        role: 'assistant',
-        content: response,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      };
+      if (flushTimer) { clearTimeout(flushTimer); flushTimer = null; }
+      flush();
 
-      setMessages((prev) => [...prev, aiMsg]);
+      // If no tokens were streamed (Ollama unreachable → fallback returned), show the fallback
+      setMessages((prev) => {
+        if (prev.find((m) => m.id === streamId)) return prev;
+        return [...prev, { id: streamId, role: 'assistant', content: finalResponse, timestamp }];
+      });
     } catch {
-      const errMsg: MessageType = {
-        id: `e-${Date.now()}`,
-        role: 'assistant',
-        content: 'Sorry, I encountered an error processing your request. Please try again.',
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      };
-      setMessages((prev) => [...prev, errMsg]);
+      setMessages((prev) => [
+        ...prev,
+        { id: streamId, role: 'assistant', content: 'Sorry, I encountered an error. Please try again.', timestamp },
+      ]);
     } finally {
       setLoading(false);
     }

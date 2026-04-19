@@ -21,6 +21,11 @@ interface StoreState {
   acknowledgeAlert: (alertId: string) => void;
   initializeFleet: () => Promise<void>;
   addLoad: (load: Load) => void;
+  setDrivers: (drivers: Driver[]) => void;
+  setLoads: (loads: Load[]) => void;
+  setAlerts: (alerts: Alert[]) => void;
+  setMetrics: (metrics: FleetMetrics) => void;
+  resetToMocks: () => void;
 }
 
 export const useStore = create<StoreState>((set) => ({
@@ -55,6 +60,17 @@ export const useStore = create<StoreState>((set) => ({
     })),
 
   addLoad: (load) => set((state) => ({ loads: [load, ...state.loads] })),
+
+  setDrivers: (drivers) => set({ drivers }),
+  setLoads: (loads) => set({ loads }),
+  setAlerts: (alerts) => set({ alerts }),
+  setMetrics: (metrics) => set({ metrics }),
+  resetToMocks: () => set({
+    drivers: MOCK_DRIVERS,
+    loads: MOCK_LOADS,
+    alerts: MOCK_ALERTS,
+    metrics: MOCK_METRICS,
+  }),
 
   initializeFleet: async () => {
     const navproDrivers = await fetchDrivers();

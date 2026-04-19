@@ -5,6 +5,7 @@ import Dispatch from './pages/Dispatch';
 import Copilot from './pages/Copilot';
 import Drivers from './pages/Drivers';
 import Analytics from './pages/Analytics';
+import Debug from './pages/Debug';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/copilot" element={<Copilot />} />
         <Route path="/drivers" element={<Drivers />} />
         <Route path="/analytics" element={<Analytics />} />
+        <Route path="/debug" element={<Debug />} />
       </Route>
     </Routes>
   );
